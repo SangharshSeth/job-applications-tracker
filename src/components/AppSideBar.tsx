@@ -2,18 +2,14 @@ import {
   AtSign,
   BadgeCheck,
   Bell,
-  Briefcase,
-  BriefcaseBusiness,
+  BrainCircuit,
   Calendar,
   ChevronsUpDown,
-  Command,
   CreditCard,
-  Home,
   Inbox,
   LogOut,
   Search,
   Settings,
-  Workflow,
 } from "lucide-react";
 
 import {
@@ -22,7 +18,6 @@ import {
   SidebarFooter,
   SidebarGroup,
   SidebarGroupContent,
-  SidebarGroupLabel,
   SidebarHeader,
   SidebarMenu,
   SidebarMenuButton,
@@ -44,8 +39,8 @@ import {
   AvatarImage,
 } from "@/components/ui/avatar.tsx";
 import { useAuthStore } from "@/store/AuthSupabase.ts";
-import { Separator } from "./ui/separator";
 import { useEffect } from "react";
+import { Separator } from "./ui/separator";
 
 // Menu items.
 const items = [
@@ -55,18 +50,13 @@ const items = [
     icon: Inbox,
   },
   {
-    title: "Calendar",
-    url: "#",
-    icon: Calendar,
-  },
-  {
-    title: "Search",
-    url: "#",
-    icon: Search,
+    title: "Analysis",
+    url: "/app/analysis",
+    icon: BrainCircuit,
   },
   {
     title: "Settings",
-    url: "#",
+    url: "/app/settings",
     icon: Settings,
   },
 ];
@@ -75,35 +65,32 @@ export function AppSidebar() {
   const { session, signOut } = useAuthStore();
   const navigator = useNavigate();
   useEffect(() => {
+    if (!session) {
+      navigator("/");
+    }
 
-    if(!session){
-      navigator("/")
-    }
-  
     return () => {
-    }
-  }, [])
-  
+    };
+  }, []);
+
   return (
     <Sidebar>
       <SidebarContent>
         <SidebarHeader>
-        <SidebarMenu>
-        <SidebarMenuItem>
-            <SidebarMenuButton size="lg" asChild>
-              <Link to="/">
-                <div className="flex aspect-square size-12 items-center justify-center rounded-lg bg-sidebar-primary text-sidebar-primary-foreground">
-                  <AtSign className="h-8 w-8" />
-                </div>
-                <div className="grid flex-1 text-left text-sm leading-tight">
-                  <span className="truncate font-semibold">JobTracker</span>
-                  <span className="truncate text-xs">Enterprise</span>
-                </div>
-              </Link>
-            </SidebarMenuButton>
-          </SidebarMenuItem>
+          <SidebarMenu>
+            <SidebarMenuItem>
+              <SidebarMenuButton size="lg" asChild>
+                <Link to="/" className="bg-slate-950 hover:bg-gray-800 hover:text-white">
+                  <div className="flex items-center space-x-2">
+                    <AtSign className="h-6 w-6 text-white" />
+                    <span className="text-xl font-medium text-white">JobTracker</span>
+                  </div>
+                </Link>
+              </SidebarMenuButton>
+            </SidebarMenuItem>
           </SidebarMenu>
         </SidebarHeader>
+        <Separator/>
         <SidebarGroup>
           <SidebarGroupContent>
             <SidebarMenu>

@@ -57,7 +57,7 @@ export default function Home() {
   const navigate = useNavigate();
   useEffect(() => {
     if (session) {
-      navigate("/app");
+      navigate("/app/timeline");
     }
   },[])
 

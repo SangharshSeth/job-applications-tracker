@@ -25,7 +25,7 @@ export const useAuthStore = create<AuthState>((set) => ({
             const { error } = await supabase.auth.signInWithOAuth({
                 provider: 'github',
                 options: {
-                    redirectTo: `${window.location.origin}/app`
+                    redirectTo: `${window.location.origin}/app/timeline`
                 }
             })
 
